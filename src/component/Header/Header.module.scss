@@ -1,0 +1,42 @@
+// main color: #b8a392
+
+.header {
+  display: flex;
+  margin: 0 25px 0 25px;
+  align-items: center;
+
+  .menuIcon {
+    display: flex;
+    width: 80px;
+    justify-content: space-between;
+    font-size: large;
+    font-weight: bolder;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+  }
+
+  .coffee-house-icon {
+    display: flex;
+    width: 550px;
+    justify-content: center;
+    img {
+      height: 100px;
+      width: 200px;
+    }
+  }
+
+  .shop-row {
+    display: flex;
+    width: 110px;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      font-size: large;
+      font-weight: bolder;
+    }
+  }
+}
