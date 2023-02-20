@@ -1,0 +1,77 @@
+.modal {
+  position: fixed;
+  width: 400px;
+  height: 100%;
+  background: white;
+  z-index: 15;
+  left: 0;
+  bottom: 0;
+  padding: 40px;
+
+  animation-name: animate;
+  animation-duration: 1s;
+
+  @keyframes animate {
+    from {
+      left: -320px;
+      opacity: 0;
+    }
+    to {
+      left: 0;
+      opacity: 1;
+    }
+  }
+
+  &-close-button {
+    display: flex;
+    align-items: center;
+    img {
+      width: 15px;
+      height: 15px;
+      margin-right: 15px;
+    }
+    P {
+      font-size: large;
+      font-weight: bolder;
+    }
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
+}
+
+.custom-modal {
+  &:before {
+    content: '';
+    background: #000;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    z-index: 10;
+  }
+}
+
+.modal-button {
+  display: flex;
+  align-items: center;
+  img {
+    width: 30px;
+    height: 30px;
+    margin: 2px 5px 0 0;
+  }
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+.horizontal-line {
+  margin: 20px 0 20px 0;
+  color: silver;
+  opacity: 0.4;
+}

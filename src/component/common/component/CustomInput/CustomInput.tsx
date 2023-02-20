@@ -1,11 +1,19 @@
 import React from 'react';
-
 import styles from './CustomInput.module.scss';
 
-export const CustomInput = () => {
+interface ICustomInput {
+  placeholder?: string
+  customHeaderStyle?: boolean
+}
+
+export const CustomInput: React.FC<ICustomInput> = ({ placeholder, customHeaderStyle = false }) => {
   return (
-    <div>
-      <input placeholder="Search Products Here" className={styles.input} />
+    <div className={styles['custom-input-style']}>
+      <input
+        placeholder={placeholder}
+        className={styles[`custom-input-style-${customHeaderStyle ? 'header' : 'default'}`]}
+      />
+      <span className={styles['focus-border']}></span>
     </div>
   )
 }

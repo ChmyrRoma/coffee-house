@@ -1,9 +1,12 @@
 // main color: #b8a392
 
 .header {
+  background-color: white;
+  height: 75px;
   display: flex;
-  margin: 0 25px 0 25px;
+  padding: 0 25px 0 25px;
   align-items: center;
+  width: 100%;
 
   .menuIcon {
     display: flex;

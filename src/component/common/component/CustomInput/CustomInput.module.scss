@@ -1,7 +1,38 @@
-.input {
-  height: 70px;
-  width: 170px;
-  border: none;
-  outline: none;
-  font-size: medium;
+.custom-input-style {
+  position: relative;
+  float: left;
+  min-width: 180px;
+  margin: 10px 3%;
+
+  &-header {
+    height: 30px;
+    width: 180px;
+    border: none;
+    outline: none;
+    font-size: medium;
+  }
+
+  &-default {
+    height: 20px;
+    min-width: 220px;
+    border: 0;
+    padding: 7px 0;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    &:focus ~ .focus-border {
+      width: 100%;
+      transition: 0.4s;
+      left: 0;
+    }
+  }
+
+  .focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #b8a392;
+    transition: 0.4s;
+  }
 }

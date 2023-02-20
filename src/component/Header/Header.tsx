@@ -1,41 +1,58 @@
-import React from 'react';
-import { CustomInput } from '../common/component/CustomInput/CustomInput'
+import React, {useState} from 'react';
+import { connect } from 'react-redux';
+import { Grid } from '@mui/material';
 
-import CoffeeHouse from '../../assets/icons/coffehouse.jpeg';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
+import CoffeeHouse from '../../assets/icons/coffee-house.webp';
+
+import { CustomInput } from '../common/component/CustomInput/CustomInput'
+import { CustomModal } from '../common/component/CustomModal/CustomModal';
+import { SignModal } from './SignModal/SignModal';
+
+import { signAction } from '../../redux/actions';
 
 import styles from './Header.module.scss';
 import '../common/styles/main.scss';
 
-const Header = () => {
+const Header = ({ signStatus }: any) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isLogModal, setIsLogModal] = useState(false)
+
+  const handleModal = () => setIsOpen(!isOpen)
+  const handleLogModal = () => setIsLogModal(!isLogModal)
+
   return (
-    <div className={styles.header}>
-      <div className={styles.menuIcon}>
-        <MenuIcon fontSize="medium" />
-        <p>Menu</p>
-      </div>
-      <div className="vertical-line" />
-      <div className={styles.row}>
-        <CustomInput />
+    <Grid className={styles.header}>
+      <Grid className={styles.menuIcon}>
+        <CustomModal isOpen={isOpen} handleModal={handleModal} />
+      </Grid>
+      <Grid className="vertical-line" />
+      <Grid className={styles.row}>
+        <CustomInput placeholder={"Search Products Here"} customHeaderStyle />
         <SearchIcon />
-      </div>
-      <div className="vertical-line" />
-      <div className={styles['coffee-house-icon']}>
+      </Grid>
+      <Grid className="vertical-line" />
+      <Grid className={styles['coffee-house-icon']}>
         <img src={CoffeeHouse} alt="coffee-house" />
-      </div>
-      <div className="vertical-line" />
-      <div>
-        <h4>Your account</h4>
-      </div>
-      <div className="vertical-line" />
-      <div className={styles['shop-row']}>
+      </Grid>
+      <Grid className="vertical-line" />
+      <Grid className={styles.row}>
+       <SignModal isLogModal={isLogModal} handleLogModal={handleLogModal} signStatus={signStatus} />
+      </Grid>
+      <Grid className="vertical-line" />
+      <Grid className={styles['shop-row']}>
         <ShoppingBasketOutlinedIcon fontSize="large" />
         <p>0 items</p>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   )
 }
 
-export default Header;
+const mapStateToProp = (state: any) => {
+  return {
+    signStatus: state.signStatus
+  }
+}
+
+export default connect(mapStateToProp, { signAction })(Header);

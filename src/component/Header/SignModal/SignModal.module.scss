@@ -1,0 +1,61 @@
+.log-modal-preview {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+
+  &-text {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 20px;
+      width: 20px;
+      margin: 2px 0 0 5px;
+    }
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
+}
+
+.log-modal {
+  position: absolute;
+  display: block;
+  justify-content: center;
+  align-items: start;
+  top: 49px;
+  right: -30px;
+  height: 150px;
+  width: 200px;
+  background: white;
+  border: 2px solid #b8a392;
+  z-index: 999;
+  padding: 10px;
+
+  &-login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  &-sign {
+    opacity: 0.8;
+    padding-top: 10px;
+    font-weight: 300;
+    font-size: medium;
+    img {
+      width: 25px;
+      height: 25px;
+    }
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+}
