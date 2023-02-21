@@ -1,30 +1,26 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import {connect, MapStateToProps} from 'react-redux';
-import { homeAction } from '../../redux/actions';
 
 import styles from './HomePage.module.scss';
+import {Button} from "../common/component/CustomButton/Button";
 
-interface IMapStateToProps {
-  homePage: IStateProps
-}
 
-interface IStateProps {
-  posts: string
-}
-
-const HomePage = ({ posts }: any) => {
+export const HomePage = () => {
   return (
-    <Grid className={styles.page}>
-      <Grid className={styles['page-content']}>Test</Grid>
+    <Grid className={styles['home-page']}>
+      <Grid className={styles['home-page-header']}>
+        <Grid className={styles['home-page-header-block']}>
+          <Grid>
+            <p className={styles['home-page-header-block-quote-one']}>The best stories are told over coffee cup.</p>
+          </Grid>
+          <Grid>
+            <p className={styles['home-page-header-block-quote-two']}>We don`t make your coffee. We make your day</p>
+          </Grid>
+          <Grid className={styles['home-page-header-block-button']}>
+            <Button content="Show Bash" />
+          </Grid>
+        </Grid>
+      </Grid>
     </Grid>
   )
 }
-
-const mapStateToProps: MapStateToProps<any, any, IMapStateToProps> = (state) => {
-  return {
-    posts: state.homePage.posts
-  }
-}
-
-export default connect(mapStateToProps, { homeAction })(HomePage);

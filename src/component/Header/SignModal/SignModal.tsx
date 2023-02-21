@@ -28,7 +28,9 @@ export const SignModal: React.FC<ILogModal> = ({ isLogModal, handleLogModal, sig
           </Link>
         </Grid>
         <Grid className={styles['log-modal-sign']}>
-          <p>Register</p>
+          <Link to="/register">
+            <p>Register</p>
+          </Link>
         </Grid>
       </Grid>
     )

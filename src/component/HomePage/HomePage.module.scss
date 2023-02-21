@@ -1,9 +1,47 @@
-.page {
-  background-image: url('../../assets/img/coffee1.webp');
-  min-width: 100%;
-  min-height: 900px;
+.home-page {
+  &-header {
+    position: relative;
+    background-image: url('../../assets/img/image-from-rawpixel-id-3305585-jpeg.jpg');
+    min-width: 100%;
+    min-height: 700px;
+    height: 10em;
+    -webkit-background-size: cover;
+    background-size: cover;
+    opacity: 1.5;
 
-  &-content {
-    color: white;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 2;
+    }
+
+    &-block {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      z-index: 3;
+
+     &-quote-one {
+        font-size: xxx-large;
+        font-weight: bold;
+      }
+      &-quote-two {
+        font-size: x-large;
+        text-align: center;
+        margin-top: 15px;
+      }
+      &-button {
+        text-align: center;
+        margin-top: 15px;
+      }
+    }
   }
 }

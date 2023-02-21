@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.sign {
+  height: 10em;
+  position: relative;
+  min-height: 705px;
+  background-size: cover;
+
+  &-background-photo-login {
+    background-image: url('../../../assets/img/login.jpg');
+  }
+  &-background-photo-register {
+    background-image: url('../../../assets/img/register.jpg');
+  }
+
+  &-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    &-back-button {
+      display: flex;
+      margin: 0 0 10px 10px;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+
+      img {
+        width: 15px;
+        height: 15px;
+      }
+
+      p {
+        margin-left: 10px;
+        font-weight: 100;
+        font-size: medium;
+      }
+
+      &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+      }
+    }
+  }
+}
