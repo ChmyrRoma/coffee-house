@@ -1,26 +1,52 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 
+import { HomePageHeader } from './HomePageHeader/HomePageHeader';
+import { HomePageHistory } from './HomePageHistory/HomePageHistory';
+import { HomePageItems } from './HomePageItems/HomePageItems';
+import { HomePageContact } from './HomePageContact/HomePageContact';
+
+import Line from '../../assets/img/background-line.png';
+
 import styles from './HomePage.module.scss';
-import {Button} from "../common/component/CustomButton/Button";
+
+interface IHomePageProps {
+  coffeeMenu: ICoffeMenuProps[]
+}
+
+interface ICoffeMenuProps {
+  id: number
+  name: string,
+  price: number
+  img: any
+}
 
 
-export const HomePage = () => {
+const HomePage: React.FC<IHomePageProps> = ({ coffeeMenu }) => {
+
+  const homePageItems = () => coffeeMenu.map((el) =>
+    <HomePageItems id={el.id} image={el.img} name={el.name} price={el.price} />
+  )
+
   return (
     <Grid className={styles['home-page']}>
-      <Grid className={styles['home-page-header']}>
-        <Grid className={styles['home-page-header-block']}>
-          <Grid>
-            <p className={styles['home-page-header-block-quote-one']}>The best stories are told over coffee cup.</p>
+      <HomePageHeader />
+      <Grid className={styles['home-page-body']}>
+        <HomePageHistory />
+        <img src={Line} alt="line" className={styles.line} />
+        <Grid className={styles['home-page-body-menu']}>
+          <Grid className={styles['home-page-body-menu-title']}>
+            <p>Coffee House Menu Category</p>
           </Grid>
-          <Grid>
-            <p className={styles['home-page-header-block-quote-two']}>We don`t make your coffee. We make your day</p>
-          </Grid>
-          <Grid className={styles['home-page-header-block-button']}>
-            <Button content="Show Bash" />
+          <Grid className={styles['home-page-body-menu-items']}>
+            {homePageItems()}
           </Grid>
         </Grid>
+        <Grid className={styles['home-page-body-background']} />
+        <HomePageContact />
       </Grid>
     </Grid>
   )
 }
+
+export default HomePage;

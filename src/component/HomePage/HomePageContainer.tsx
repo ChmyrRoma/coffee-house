@@ -2,23 +2,30 @@ import React from 'react';
 import { connect, MapStateToProps } from 'react-redux';
 import { homeAction } from '../../redux/actions';
 
-import { HomePage } from './HomePage';
+import HomePage from './HomePage';
 
 interface IMapStateToProps {
   homePage: IStateProps
 }
 
 interface IStateProps {
-  posts: string
+  coffeeMenu: ICoffeeMenuProps[]
 }
 
-const HomePageContainer = ({ posts }: any) => {
-  return <HomePage />
+interface ICoffeeMenuProps {
+  id: number
+  name: string,
+  price: number
+  img: any
+}
+
+const HomePageContainer: React.FC<IStateProps> = ({ coffeeMenu }) => {
+  return <HomePage coffeeMenu={coffeeMenu} />
 }
 
 const mapStateToProps: MapStateToProps<any, any, IMapStateToProps> = (state) => {
   return {
-    posts: state.homePage.posts
+    coffeeMenu: state.homePage.coffeeMenu
   }
 }
 

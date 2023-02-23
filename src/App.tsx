@@ -17,7 +17,7 @@ const CurrentPage = () => {
 
 const App = ({ store }: any) => {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<CurrentPage />}>
           <Route path="" element={<HomePageContainer store={store} />} />
@@ -25,7 +25,7 @@ const App = ({ store }: any) => {
         <Route path="/login" element={<Auth />} />
         <Route path="/register" element={<Auth />} />
       </Routes>
-    </div>
+    </>
   )
 }
 
