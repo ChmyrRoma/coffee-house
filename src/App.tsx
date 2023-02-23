@@ -1,16 +1,19 @@
 import React from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
+
 import Header from './component/Header/Header';
+import Footer from './component/Footer/Footer';
 import HomePageContainer from './component/HomePage/HomePageContainer';
+import Auth from './component/Header/SignPages/Auth';
 
 import './App.css';
-import Auth from "./component/Header/SignPages/Auth";
 
 const CurrentPage = () => {
   return (
     <div>
       <Header />
       <Outlet />
+      <Footer />
     </div>
   )
 }

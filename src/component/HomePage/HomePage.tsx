@@ -17,15 +17,15 @@ interface IHomePageProps {
 interface ICoffeMenuProps {
   id: number
   name: string,
-  price: number
-  img: any
+  status: string
+  img: string
 }
 
 
 const HomePage: React.FC<IHomePageProps> = ({ coffeeMenu }) => {
 
   const homePageItems = () => coffeeMenu.map((el) =>
-    <HomePageItems id={el.id} image={el.img} name={el.name} price={el.price} />
+    <HomePageItems id={el.id} image={el.img} name={el.name} status={el.status} />
   )
 
   return (

@@ -15,8 +15,8 @@ interface IStateProps {
 interface ICoffeeMenuProps {
   id: number
   name: string,
-  price: number
-  img: any
+  status: string
+  img: string
 }
 
 const HomePageContainer: React.FC<IStateProps> = ({ coffeeMenu }) => {

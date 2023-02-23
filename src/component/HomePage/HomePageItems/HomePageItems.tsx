@@ -6,11 +6,11 @@ import styles from './HomePageItems.module.scss';
 interface ICoffeMenuProps {
   id: number
   name: string,
-  price: number
-  image: any
+  status: string
+  image: string
 }
 
-export const HomePageItems: React.FC<ICoffeMenuProps> = ({ id, image, name, price }) => {
+export const HomePageItems: React.FC<ICoffeMenuProps> = ({ id, image, name, status }) => {
   return (
     <Grid key={id} className={styles['items-content']}>
       <Grid className={styles['items-content-photo']}>
@@ -20,7 +20,7 @@ export const HomePageItems: React.FC<ICoffeMenuProps> = ({ id, image, name, pric
         {name}
       </Grid>
       <Grid className={styles['items-content-price']}>
-        <p>{price}</p>
+        <p>{status}</p>
       </Grid>
     </Grid>
   )
