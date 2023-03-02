@@ -11,21 +11,21 @@ import Line from '../../assets/img/background-line.png';
 import styles from './HomePage.module.scss';
 
 interface IHomePageProps {
-  coffeeMenu: ICoffeMenuProps[]
+  homeCoffeeMenu: IHomeCoffeMenuProps[]
 }
 
-interface ICoffeMenuProps {
+interface IHomeCoffeMenuProps {
   id: number
-  name: string,
-  status: string
+  name: string
+  link: string
   img: string
 }
 
 
-const HomePage: React.FC<IHomePageProps> = ({ coffeeMenu }) => {
+const HomePage: React.FC<IHomePageProps> = ({ homeCoffeeMenu }) => {
 
-  const homePageItems = () => coffeeMenu.map((el) =>
-    <HomePageItems id={el.id} image={el.img} name={el.name} status={el.status} />
+  const homePageItems = () => homeCoffeeMenu.map((el) =>
+    <HomePageItems id={el.id} image={el.img} name={el.name} link={el.link} />
   )
 
   return (
@@ -36,7 +36,7 @@ const HomePage: React.FC<IHomePageProps> = ({ coffeeMenu }) => {
         <img src={Line} alt="line" className={styles.line} />
         <Grid className={styles['home-page-body-menu']}>
           <Grid className={styles['home-page-body-menu-title']}>
-            <p>Coffee House Menu Category</p>
+            <p>Coffee House Top Menu Category</p>
           </Grid>
           <Grid className={styles['home-page-body-menu-items']}>
             {homePageItems()}

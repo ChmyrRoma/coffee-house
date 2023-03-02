@@ -1,32 +1,30 @@
 import React from 'react';
+import {connect, MapStateToProps} from 'react-redux';
 import { Grid } from '@mui/material';
 import { FooterLinks } from './FooterLinks/FooterLinks';
 import { FooterContact } from './FooterContact/FooterContact';
 
 import CoffeeHouse from '../../assets/icons/coffee-house.webp';
-import PhoneIcon from '../../assets/icons/phone.png';
-import EmailIcon from '../../assets/icons/email.png';
-import LocationIcon from '../../assets/icons/location.jpg';
-import ArrowRight from '../../assets/icons/arrow-right.png';
 
 import styles from './Footer.module.scss';
 
-const linksName = [
-  {id: 1, img: ArrowRight, name: 'Home', link: '/'},
-  {id: 2, img: ArrowRight, name: 'Login', link: '/login'},
-  {id: 3, img: ArrowRight, name: 'Registration', link: '/register'},
-]
+interface IFooter {
+  linksName: IState[]
+  sideBarContact: IState[]
+}
 
+interface IMapStateToProps {
+  footer: IFooter
+}
 
-const sideBarContact = [
-  {id: 1, img: PhoneIcon, name: '+111-222-333'},
-  {id: 2, img: PhoneIcon, name: '+123-456-789'},
-  {id: 3, img: EmailIcon, name: 'abc@gmail.com'},
-  {id: 4, img: EmailIcon, name: 'xyz@gmail.com'},
-  {id: 4, img: LocationIcon, name: 'Cherkasy, Ukraine'}
-]
+interface IState {
+  id: number
+  name: string
+  img: string
+  link: string
+}
 
-const Footer = () => {
+const Footer: React.FC<IFooter> = ({ linksName, sideBarContact }) => {
 
   const footerLinks = () =>
     linksName.map((el) => <FooterLinks id={el.id} img={el.img} name={el.name} link={el.link} />)
@@ -57,4 +55,11 @@ const Footer = () => {
   )
 }
 
-export default Footer;
+const mapStateToProps: MapStateToProps<any, any, IMapStateToProps> = (state) => {
+  return {
+    linksName: state.footer.linksName,
+    sideBarContact: state.footer.sideBarContact
+  }
+}
+
+export default connect(mapStateToProps)(Footer);

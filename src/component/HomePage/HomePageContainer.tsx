@@ -9,23 +9,23 @@ interface IMapStateToProps {
 }
 
 interface IStateProps {
-  coffeeMenu: ICoffeeMenuProps[]
+  homeCoffeeMenu: IHomeCoffeeMenuProps[]
 }
 
-interface ICoffeeMenuProps {
+interface IHomeCoffeeMenuProps {
   id: number
-  name: string,
-  status: string
+  name: string
+  link: string
   img: string
 }
 
-const HomePageContainer: React.FC<IStateProps> = ({ coffeeMenu }) => {
-  return <HomePage coffeeMenu={coffeeMenu} />
+const HomePageContainer: React.FC<IStateProps> = ({ homeCoffeeMenu }) => {
+  return <HomePage homeCoffeeMenu={homeCoffeeMenu} />
 }
 
 const mapStateToProps: MapStateToProps<any, any, IMapStateToProps> = (state) => {
   return {
-    coffeeMenu: state.homePage.coffeeMenu
+    homeCoffeeMenu: state.homePage.homeCoffeeMenu
   }
 }
 

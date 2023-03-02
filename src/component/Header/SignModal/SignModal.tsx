@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import KeyboardArrowDown from '../../../assets/icons/keyboard-down.png'
 import KeyboardArrowTop from '../../../assets/icons/keyboard-top.png'
 
 import styles from './SignModal.module.scss';
-import {Link} from "react-router-dom";
 
 
 interface ILogModal {
@@ -15,10 +15,6 @@ interface ILogModal {
 }
 
 export const SignModal: React.FC<ILogModal> = ({ isLogModal, handleLogModal, signStatus }) => {
-
-  useEffect(() => {
-    console.log(signStatus)
-  }, [])
   const LogModalContent = () => {
     return (
       <Grid className={styles['log-modal']}>
@@ -42,7 +38,7 @@ export const SignModal: React.FC<ILogModal> = ({ isLogModal, handleLogModal, sig
         <h4>Your Account</h4>
         <img src={isLogModal ? KeyboardArrowTop : KeyboardArrowDown} alt="keyboard-arrow" />
       </Grid>
-      <Grid>
+      <Grid className={styles.modal}>
         { isLogModal ? <LogModalContent /> : null }
       </Grid>
     </Grid>

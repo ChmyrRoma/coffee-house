@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
@@ -34,7 +35,9 @@ const Header = ({ signStatus }: any) => {
       </Grid>
       <Grid className="vertical-line" />
       <Grid className={styles['coffee-house-icon']}>
-        <img src={CoffeeHouse} alt="coffee-house" />
+        <Link to="/">
+          <img src={CoffeeHouse} alt="coffee-house" />
+        </Link>
       </Grid>
       <Grid className="vertical-line" />
       <Grid className={styles.row}>
