@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Outlet, useLocation } from 'react-router-dom';
 
 import Header from './component/Header/Header';
 import Footer from './component/Footer/Footer';
 import HomePageContainer from './component/HomePage/HomePageContainer';
 import Auth from './component/Header/SignPages/Auth';
-import CoffeeMenuContainer from './component/CoffeeMenu/CoffeeMenuContainer';
+import { CoffeeMenu } from './component/CoffeeMenu/CoffeeMenu';
 
 import './App.css';
 
@@ -20,26 +20,25 @@ const CurrentPage = () => {
 }
 
 const App = () => {
-  const [checkLocation, setCheckLocation] = useState('');
   const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, [location.pathname]);
 
-    if (location.pathname === '/menu/latte') return setCheckLocation('latte');
-    if (location.pathname === '/menu/cappuccino') return setCheckLocation('cappuccino');
-    if (location.pathname === '/menu/mocha') return setCheckLocation('mocha');
-    if (location.pathname === '/menu/green-tea') return setCheckLocation('green-tea');
-  }, [location]);
+  const items = [
+    { type: '' }, { type: 'latte' }, { type: 'cappuccino' }, { type: 'mocha' },
+    { type: 'green-tea' }, { type: 'black-coffee' }, { type: 'cupcake' },
+    { type: 'black-tea' }, { type: 'espresso' }, { type: 'hot-chocolate' }
+  ]
 
+  // const menu = coffeeMenu[type]
   return (
     <>
       <Routes>
         <Route path="/" element={<CurrentPage />}>
           <Route path="" element={<HomePageContainer />} />
-          <Route path="/menu/*" element={<CoffeeMenuContainer />}>
-            <Route path={checkLocation} element={<CoffeeMenuContainer />} />
-          </Route>
+          { items.map(({type}) => <Route path={`/menu/${type}`} element={<CoffeeMenu type={type} />} />) }
         </Route>
         <Route path="/login" element={<Auth />} />
         <Route path="/register" element={<Auth />} />

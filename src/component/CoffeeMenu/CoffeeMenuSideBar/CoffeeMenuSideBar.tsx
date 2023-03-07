@@ -11,7 +11,7 @@ interface ICoffeeMenuSideBar {
   activeLink: boolean
 }
 
-export const CoffeeMenuSideBar: React.FC<ICoffeeMenuSideBar> = ({ name, link, activeLink }) => {
+export const CoffeeMenuSideBar: React.FC<ICoffeeMenuSideBar> = ({ name, link,activeLink }) => {
   return (
     <Grid className={styles['container']}>
       <Grid className={styles['container-content']}>

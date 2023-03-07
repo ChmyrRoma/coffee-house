@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@mui/material';
-import classnames from 'classnames';
 
 import styles from './CoffeeMenuItems.module.scss';
-import {Link} from "react-router-dom";
+import {CoffeeMenuItemModal} from "./CoffeeMenuItemModal/CoffeeMenuItemModal";
 
 interface ICoffeeMenu {
   id: number
@@ -11,13 +10,17 @@ interface ICoffeeMenu {
   price: number
   img: string
   content: string
-  menuPath: boolean
   link: string
+  menuPath: boolean
 }
 
 export const CoffeeMenuItems: React.FC<ICoffeeMenu> = ({
- id, name, price, img, content, menuPath, link
+ id, name, price, img, content, link, menuPath
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleChange = () => setIsOpen(!isOpen);
+
   return (
     <Grid key={id} className={styles['coffee-menu-body-container']}>
       <Grid className={styles['coffee-menu-body-container-photo']}>
@@ -26,14 +29,15 @@ export const CoffeeMenuItems: React.FC<ICoffeeMenu> = ({
       <Grid className={styles['coffee-menu-body-container-name']}>
         {name}
       </Grid>
-      <Grid className={styles['coffee-menu-body-container-status']}>
-        <p className={classnames({[styles['without-text']]: !menuPath})}>
-          <Link to={link}>{price || content}</Link>
-        </p>
-        <p className={classnames({ [styles['background-text']]: true, [styles['without-background-text']]: !menuPath })}>
-          Add to Cart
-        </p>
-      </Grid>
+      <CoffeeMenuItemModal
+        isOpen={isOpen}
+        handleChange={handleChange}
+        content={content}
+        menuPath={menuPath}
+        price={price}
+        name={name}
+        image={img}
+      />
     </Grid>
   )
 }

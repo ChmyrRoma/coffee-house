@@ -1,0 +1,25 @@
+.coffee-menu-body-container {
+  width: 360px;
+  height: 390px;
+  margin: 30px;
+  box-shadow: 0 1px 1px silver,
+              0 4px 3px silver,
+              0 6px 3px silver,
+              0 2px 3px 2px silver;
+
+  &-photo {
+    text-align: center;
+    img {
+      width: 360px;
+      height: 280px;
+    }
+  }
+
+  &-name {
+    text-align: center;
+    font-weight: lighter;
+    font-size: x-large;
+    margin: 10px 0 15px 0;
+    color: #b8a392;
+  }
+}
