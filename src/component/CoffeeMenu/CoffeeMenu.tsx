@@ -7,13 +7,20 @@ import { CoffeeMenuSideBar } from './CoffeeMenuSideBar/CoffeeMenuSideBar';
 
 import styles from './CoffeeMenu.module.scss';
 
+
+interface ICoffeeMenuProps {
+  type: string
+}
+
 interface IMapStateToProps {
   coffeeMenu: IState
+  coffeeMenuItems: any
 }
 
 interface IState {
   menu: IStateProps
   categories: IStateCategoriesProps[]
+  counter: any
 }
 
 interface IStateCategoriesProps {
@@ -41,12 +48,16 @@ interface IStateToProps {
   price: number
   img: string
   link: string
+  description: string
 }
 
-export const CoffeeMenu: React.FC<any> = ({ type }) => {
 
-  const coffeeMenu = useSelector((state: IMapStateToProps) => state.coffeeMenu);
-  const { menu, categories }: IState = coffeeMenu;
+const CoffeeMenu: React.FC<ICoffeeMenuProps> = ({ type }) => {
+
+  const state = useSelector((state: IMapStateToProps) => state);
+
+  const { menu, categories } = state.coffeeMenu;
+  const { count } = state.coffeeMenuItems;
 
   const items = [
     { itemType: '', title: '', data: categories },
@@ -61,44 +72,27 @@ export const CoffeeMenu: React.FC<any> = ({ type }) => {
     { itemType: 'hot-chocolate', title: 'Hot Chocolate', data: menu.hotChocolateMenu },
   ]
 
-
-  // const coffeeMenuItems = (itemType: any, data: any, title: any) => {
-  //   if (type === itemType) {
-  //     return data.map((el: IStateToProps) => (
-  //       <CoffeeMenuItems
-  //         id={el.id}
-  //         name={el.name}
-  //         link={el.link}
-  //         price={el.price}
-  //         menuPath={type === ''}
-  //         content='Show in Menu'
-  //         img={el.img}
-  //       />
-  //     ))
-  //   }
-  // }
-
-
   const coffeeMenuItems = (sideBar: boolean) => {
     return items.map(({ itemType, data, title }) => (
       sideBar ? (
         <CoffeeMenuSideBar name={title} activeLink={type === itemType} link={`/menu/${itemType}`} />
       ) : (
-        (type === itemType) && data.map((el: any) => (
+        (type === itemType) && data.map(({ id, name, price, img, description, link }: any) => (
           <CoffeeMenuItems
-            id={el.id}
-            name={el.name}
-            link={el.link}
-            price={el.price}
+            id={id}
+            name={name}
+            price={price}
             menuPath={type === ''}
             content='Show in Menu'
-            img={el.img}
+            img={img}
+            description={description}
+            link={link}
+            count={count}
           />
         ))
       )
     ))
   }
-
 
   return (
     <Grid className={styles['coffee-menu']}>
@@ -120,3 +114,5 @@ export const CoffeeMenu: React.FC<any> = ({ type }) => {
     </Grid>
   )
 }
+
+export default CoffeeMenu;

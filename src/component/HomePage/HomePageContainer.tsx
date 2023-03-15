@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, MapStateToProps } from 'react-redux';
-import { homeAction } from '../../redux/actions';
+import { homeAction } from '../../redux/actions/actions';
 
 import HomePage from './HomePage';
 

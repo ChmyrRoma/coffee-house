@@ -1,3 +1,5 @@
+import counterActions from './counterActions'
+
 export const homeAction = () => {
   return {
     type: 'HOME_PAGE_MENU`',
@@ -10,8 +12,8 @@ export const signAction = () => {
   }
 }
 
-export const coffeeMenuAction = () => {
-  return {
-    type: 'COFFEE_MENU'
-  }
+const allActions = {
+  counterActions
 }
+
+export default allActions

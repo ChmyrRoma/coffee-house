@@ -71,8 +71,9 @@
 
         &-text {
           p {
-            font-size: x-large;
-            font-family: "Big Caslon";
+            font-size: larger;
+            font-weight: 300;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
           }
         }
 
@@ -83,41 +84,112 @@
           margin-top: 10px;
         }
 
-        &-count {
+        &-counter {
           display: flex;
-          margin-top: 10px;
-          width: 200px;
-          border-radius: 10px;
+          justify-content: center;
 
-          p {
+          &-block {
             display: flex;
-            font-size: x-large;
-            border: 1px solid #b8a392;
-            border-radius: 10px;
-            box-shadow: 1px 1px 3px 1px #b8a392;
-            width: 65px;
-            align-items: center;
-            justify-content: center;
-          }
-
-          .minus {
-            margin-top: 20px;
-            height: 30px;
-
-          }
-
-          .count {
+            margin: 30px 50px 0 50px;
             height: 40px;
-          }
+            width: 270px;
+            border-radius: 8px;
 
-          .plus {
-            margin-top: 20px;
-            height: 30px;
+            p {
+              display: flex;
+              font-size: x-large;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+              font-weight: lighter;
+              align-items: center;
+              justify-content: center;
+            }
+
+            img {
+              width: 30px;
+              height: 30px;
+            }
+
+            .minus {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              height: 40px;
+              width: 90px;
+              border-radius: 8px;
+
+              &:hover {
+                background-color: #f0eae4;
+                box-shadow: 0 1px 5px 2px #f0eae4;
+              }
+
+              &:active {
+                opacity: 0.8;
+                box-shadow: inset 0 1px 5px 2px #b8a392;
+
+                img {
+                  zoom: 0.8;
+                }
+
+                p {
+                  zoom: 0.8;
+                }
+              }
+            }
+
+            .disabled {
+              opacity: 0.3;
+              pointer-events: none;
+            }
+
+            .count {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 40px;
+              padding-top: 5px;
+              width: 90px;
+              border-radius: 8px;
+
+              &:hover {
+                background-color: #f0eae4;
+                box-shadow: 0 1px 5px 2px #f0eae4;
+              }
+            }
+
+            .plus {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              height: 40px;
+              width: 90px;
+              border-radius: 8px;
+
+              &:hover {
+                background-color: #f0eae4;
+                box-shadow: 0 1px 5px 2px #f0eae4;
+              }
+
+              &:active {
+                opacity: 0.8;
+                box-shadow: inset 0 1px 5px 2px #b8a392;
+
+                img {
+                  zoom: 0.8;
+                }
+
+                p {
+                  zoom: 0.8;
+                }
+              }
+            }
           }
         }
 
         &-button {
           display: flex;
+          justify-content: center;
           margin-top: 25px;
         }
       }
@@ -137,11 +209,18 @@
     text-align: center;
     width: 100px;
     opacity: 0.6;
+
     &:hover {
       opacity: 1;
       cursor: pointer;
     }
   }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
   .background-text {
     display: none;
   }

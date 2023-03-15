@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 
+import { CoffeeMenuItemModal } from './CoffeeMenuItemModal/CoffeeMenuItemModal';
+
 import styles from './CoffeeMenuItems.module.scss';
-import {CoffeeMenuItemModal} from "./CoffeeMenuItemModal/CoffeeMenuItemModal";
 
 interface ICoffeeMenu {
   id: number
@@ -10,12 +11,15 @@ interface ICoffeeMenu {
   price: number
   img: string
   content: string
-  link: string
+  description: string
   menuPath: boolean
+  link: string
+  count: number
 }
 
 export const CoffeeMenuItems: React.FC<ICoffeeMenu> = ({
- id, name, price, img, content, link, menuPath
+ id, name, price, img, content, menuPath, description,
+ link, count
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,6 +41,9 @@ export const CoffeeMenuItems: React.FC<ICoffeeMenu> = ({
         price={price}
         name={name}
         image={img}
+        description={description}
+        link={link}
+        count={count}
       />
     </Grid>
   )

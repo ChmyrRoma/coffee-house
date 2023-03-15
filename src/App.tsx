@@ -5,7 +5,7 @@ import Header from './component/Header/Header';
 import Footer from './component/Footer/Footer';
 import HomePageContainer from './component/HomePage/HomePageContainer';
 import Auth from './component/Header/SignPages/Auth';
-import { CoffeeMenu } from './component/CoffeeMenu/CoffeeMenu';
+import CoffeeMenu from './component/CoffeeMenu/CoffeeMenu';
 
 import './App.css';
 

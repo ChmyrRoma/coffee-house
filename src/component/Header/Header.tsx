@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -8,10 +8,10 @@ import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlin
 import CoffeeHouse from '../../assets/icons/coffee-house.webp';
 
 import { CustomInput } from '../common/component/CustomInput/CustomInput'
-import { CustomModal } from '../common/component/CustomModal/CustomModal';
+import { HeaderModal } from './HeaderModal/HeaderModal';
 import { SignModal } from './SignModal/SignModal';
 
-import { signAction } from '../../redux/actions';
+import { signAction } from '../../redux/actions/actions';
 
 import styles from './Header.module.scss';
 import '../common/styles/main.scss';
@@ -20,13 +20,17 @@ const Header = ({ signStatus }: any) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isLogModal, setIsLogModal] = useState(false)
 
+  const coffeeMenu = useSelector((state: any) => state.coffeeMenu);
+
+  const { categories }: any = coffeeMenu
+
   const handleModal = () => setIsOpen(!isOpen)
   const handleLogModal = () => setIsLogModal(!isLogModal)
 
   return (
     <Grid className={styles.header}>
       <Grid className={styles.menuIcon}>
-        <CustomModal isOpen={isOpen} handleModal={handleModal} />
+        <HeaderModal isOpen={isOpen} handleModal={handleModal} categories={categories} />
       </Grid>
       <Grid className="vertical-line" />
       <Grid className={styles.row}>

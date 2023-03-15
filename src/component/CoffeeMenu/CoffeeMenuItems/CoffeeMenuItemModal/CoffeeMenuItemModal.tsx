@@ -1,11 +1,16 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import { Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
+import allActions from '../../../../redux/actions/actions';
+
+import { Button } from '../../../common/component/CustomButton/Button';
 
 import CloseIcon from '../../../../assets/icons/close-icon.png';
+import CoffeeCup from '../../../../assets/icons/coffeeCup.png'
 
 import styles from './CoffeeMenuItemModal.module.scss';
-import {Button} from "../../../common/component/CustomButton/Button";
 
 interface ICoffeeMenuItemModal {
   isOpen: boolean
@@ -15,12 +20,19 @@ interface ICoffeeMenuItemModal {
   price: number
   name: string
   image: string
+  description: string
+  link: string
+  count: number
 }
 
 
 export const CoffeeMenuItemModal: React.FC<ICoffeeMenuItemModal> = ({
- isOpen, handleChange, content, menuPath, price , name, image
+ isOpen, handleChange, content, menuPath, price , name, image,
+ description, link, count
 }) => {
+
+  const dispatch = useDispatch()
+
 
   React.useEffect(() => {
     if (isOpen) {
@@ -31,7 +43,7 @@ export const CoffeeMenuItemModal: React.FC<ICoffeeMenuItemModal> = ({
     }
   }, [isOpen])
 
-  const CustomModal = () => {
+  const Modal = () => {
     return (
       <Grid className={styles['modal-container']}>
         <Grid className={styles['modal-container-header']}>
@@ -50,20 +62,24 @@ export const CoffeeMenuItemModal: React.FC<ICoffeeMenuItemModal> = ({
           <Grid className={styles['modal-container-body-content']}>
             <hr className={styles.inline} />
             <Grid className={styles['modal-container-body-content-text']}>
-              <p>
-                An iced latte is a drink with espresso, milk and optional sweetener.
-                The milk is often frothed to simulate the steamed milk in a standard latte.
-                So what's the difference vs iced coffee? Iced coffee uses brewed coffee and optional milk.
-              </p>
+              <p>{description}</p>
             </Grid>
             <hr className={styles.inline} />
             <Grid className={styles['modal-container-body-content-price']}>
               <p>{price}</p>
             </Grid>
-            <Grid className={styles['modal-container-body-content-count']}>
-              <p className={styles.minus}>-</p>
-              <p className={styles.count}>0</p>
-              <p className={styles.plus}>+</p>
+            <Grid className={styles['modal-container-body-content-counter']}>
+              <Grid className={styles['modal-container-body-content-counter-block']}>
+                <Grid className={classnames({ [styles.minus]: true, [styles.disabled]: count <= 0 })} onClick={() => dispatch(allActions.counterActions.decreaseCount())}>
+                  <p>-</p>
+                  <img src={CoffeeCup} alt="coffee-cup" />
+                </Grid>
+                <Grid className={styles.count}><p>{count}</p></Grid>
+                <Grid className={styles.plus} onClick={() => dispatch(allActions.counterActions.increaseCount())}>
+                  <p>+</p>
+                  <img src={CoffeeCup} alt="coffee-cup" />
+                </Grid>
+              </Grid>
             </Grid>
             <Grid className={styles['modal-container-body-content-button']}>
               <Button content="Add to Trip" />
@@ -76,17 +92,17 @@ export const CoffeeMenuItemModal: React.FC<ICoffeeMenuItemModal> = ({
 
  return (
    <Grid>
-     <Grid className={styles['coffee-menu-body-container-status']} onClick={handleChange}>
+     <Grid className={styles['coffee-menu-body-container-status']}>
        <p className={classnames({[styles['without-text']]: !menuPath})}>
-         <p>{price || content}</p>
+         <Link to={link}>{price || content}</Link>
        </p>
-       <p className={classnames({ [styles['background-text']]: true, [styles['without-background-text']]: !menuPath })}>
+       <p onClick={handleChange} className={classnames({ [styles['background-text']]: true, [styles['without-background-text']]: !menuPath })}>
          Add to Cart
        </p>
      </Grid>
      {isOpen && (
        <Grid className={styles['modal']}>
-         <CustomModal />
+         <Modal />
        </Grid>
      )}
    </Grid>
