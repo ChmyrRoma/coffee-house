@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -23,22 +22,32 @@ interface ICoffeeMenuItemModal {
   description: string
   link: string
   count: number
+  total: number
+  dispatch: any
+  cartItems: any
 }
 
 
 export const CoffeeMenuItemModal: React.FC<ICoffeeMenuItemModal> = ({
  isOpen, handleChange, content, menuPath, price , name, image,
- description, link, count
+ description, link, count, dispatch, cartItems, total
 }) => {
 
-  const dispatch = useDispatch()
-
+  const reduceToString = (element: number) => {
+    if (element.toString().length === 3) {
+      return `${element}0`
+    }
+    if (element.toString().length > 2) {
+      return element
+    } else {
+      return `${element}.00`
+    }
+  }
 
   React.useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
-    }
-    if (!isOpen) {
+    } else {
       document.body.style.overflow = "";
     }
   }, [isOpen])
@@ -66,22 +75,22 @@ export const CoffeeMenuItemModal: React.FC<ICoffeeMenuItemModal> = ({
             </Grid>
             <hr className={styles.inline} />
             <Grid className={styles['modal-container-body-content-price']}>
-              <p>{price}</p>
+              <p>${reduceToString(price)}</p>
             </Grid>
             <Grid className={styles['modal-container-body-content-counter']}>
               <Grid className={styles['modal-container-body-content-counter-block']}>
-                <Grid className={classnames({ [styles.minus]: true, [styles.disabled]: count <= 0 })} onClick={() => dispatch(allActions.counterActions.decreaseCount())}>
+                <Grid className={classnames({ [styles.minus]: true, [styles.disabled]: count <= 0 })} onClick={() => dispatch(allActions.counterActions.decreaseCount(count - 1))}>
                   <p>-</p>
                   <img src={CoffeeCup} alt="coffee-cup" />
                 </Grid>
                 <Grid className={styles.count}><p>{count}</p></Grid>
-                <Grid className={styles.plus} onClick={() => dispatch(allActions.counterActions.increaseCount())}>
+                <Grid className={styles.plus} onClick={() => dispatch(allActions.counterActions.increaseCount(count + 1))}>
                   <p>+</p>
                   <img src={CoffeeCup} alt="coffee-cup" />
                 </Grid>
               </Grid>
             </Grid>
-            <Grid className={styles['modal-container-body-content-button']}>
+            <Grid className={classnames({ [styles['modal-container-body-content-button']]: true, [styles.disabled]: count <= 0 })} onClick={() => dispatch(allActions.counterActions.addToCart(cartItems))}>
               <Button content="Add to Trip" />
             </Grid>
           </Grid>
@@ -94,7 +103,7 @@ export const CoffeeMenuItemModal: React.FC<ICoffeeMenuItemModal> = ({
    <Grid>
      <Grid className={styles['coffee-menu-body-container-status']}>
        <p className={classnames({[styles['without-text']]: !menuPath})}>
-         <Link to={link}>{price || content}</Link>
+         <Link to={link}>{price ? `$${reduceToString(price)}` : price || content}</Link>
        </p>
        <p onClick={handleChange} className={classnames({ [styles['background-text']]: true, [styles['without-background-text']]: !menuPath })}>
          Add to Cart

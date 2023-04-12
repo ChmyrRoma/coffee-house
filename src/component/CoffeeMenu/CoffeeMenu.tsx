@@ -46,6 +46,7 @@ interface IStateToProps {
   id: number
   name: string
   price: number
+  total: number
   img: string
   link: string
   description: string
@@ -58,6 +59,8 @@ const CoffeeMenu: React.FC<ICoffeeMenuProps> = ({ type }) => {
 
   const { menu, categories } = state.coffeeMenu;
   const { count } = state.coffeeMenuItems;
+
+  console.log('TEST', count)
 
   const items = [
     { itemType: '', title: '', data: categories },
@@ -77,11 +80,12 @@ const CoffeeMenu: React.FC<ICoffeeMenuProps> = ({ type }) => {
       sideBar ? (
         <CoffeeMenuSideBar name={title} activeLink={type === itemType} link={`/menu/${itemType}`} />
       ) : (
-        (type === itemType) && data.map(({ id, name, price, img, description, link }: any) => (
+        (type === itemType) && data.map(({ id, name, price, img, description, link, total }: any) => (
           <CoffeeMenuItems
             id={id}
             name={name}
             price={price}
+            total={total}
             menuPath={type === ''}
             content='Show in Menu'
             img={img}

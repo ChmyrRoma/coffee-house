@@ -1,31 +1,46 @@
 import React, {useState} from 'react';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import SearchIcon from '@mui/icons-material/Search';
-import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
 import CoffeeHouse from '../../assets/icons/coffee-house.webp';
 
 import { CustomInput } from '../common/component/CustomInput/CustomInput'
 import { HeaderModal } from './HeaderModal/HeaderModal';
 import { SignModal } from './SignModal/SignModal';
-
-import { signAction } from '../../redux/actions/actions';
+import CartModalContainer from './CartModal/CartModalContainer';
 
 import styles from './Header.module.scss';
 import '../common/styles/main.scss';
 
-const Header = ({ signStatus }: any) => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isLogModal, setIsLogModal] = useState(false)
+  const [orderStatus, setOrderStatus] = useState(false);
+  const [isCartModal, setIsCartModal] = useState(false)
 
-  const coffeeMenu = useSelector((state: any) => state.coffeeMenu);
+  const state = useSelector((state: any) => state);
 
-  const { categories }: any = coffeeMenu
+  const { categories }: any = state.coffeeMenu;
+  const { signStatus }: any = state.signStatus;
+  const { cart }: any = state.coffeeMenuItems;
 
-  const handleModal = () => setIsOpen(!isOpen)
-  const handleLogModal = () => setIsLogModal(!isLogModal)
+  console.log('CART::::::::', cart)
+
+  const handleChange = () => setOrderStatus(!orderStatus);
+
+
+  const handleModal = () => {
+    setIsOpen(!isOpen);
+    setIsLogModal(false);
+  }
+  const handleLogModal = () => setIsLogModal(!isLogModal);
+  const handleCartModal = () => {
+    setIsCartModal(!isCartModal);
+    setIsLogModal(false);
+    setOrderStatus(false)
+  }
 
   return (
     <Grid className={styles.header}>
@@ -49,17 +64,16 @@ const Header = ({ signStatus }: any) => {
       </Grid>
       <Grid className="vertical-line" />
       <Grid className={styles['shop-row']}>
-        <ShoppingBasketOutlinedIcon fontSize="large" />
-        <p>0 items</p>
+        <CartModalContainer
+          cart={cart}
+          isCartModal={isCartModal}
+          handleCartModal={handleCartModal}
+          handleChange={handleChange}
+          orderStatus={orderStatus}
+        />
       </Grid>
     </Grid>
   )
 }
 
-const mapStateToProp = (state: any) => {
-  return {
-    signStatus: state.signStatus
-  }
-}
-
-export default connect(mapStateToProp, { signAction })(Header);
+export default Header;

@@ -26,7 +26,7 @@ export const HeaderModal: React.FC<ICustomModal> = ({ isOpen, handleModal, categ
         { categories.map((el: any) => (
           <Grid>
             <hr className={styles['horizontal-line']} />
-            <Grid className={styles.test}>
+            <Grid className={styles['item-links']}>
               <Link to={el.link} onClick={handleModal}>{el.name}</Link>
               <img src={el.img} alt="menu" />
             </Grid>

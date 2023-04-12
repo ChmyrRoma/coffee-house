@@ -137,11 +137,6 @@
               }
             }
 
-            .disabled {
-              opacity: 0.3;
-              pointer-events: none;
-            }
-
             .count {
               display: flex;
               justify-content: center;
@@ -236,4 +231,9 @@
 
 .inline {
   border: 1px solid #b8a392;
+}
+
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
 }

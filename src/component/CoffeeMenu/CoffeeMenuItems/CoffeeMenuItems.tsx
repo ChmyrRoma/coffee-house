@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
 import { CoffeeMenuItemModal } from './CoffeeMenuItemModal/CoffeeMenuItemModal';
 
 import styles from './CoffeeMenuItems.module.scss';
+import allActions from "../../../redux/actions/actions";
 
 interface ICoffeeMenu {
   id: number
@@ -15,15 +17,29 @@ interface ICoffeeMenu {
   menuPath: boolean
   link: string
   count: number
+  total: number
 }
 
 export const CoffeeMenuItems: React.FC<ICoffeeMenu> = ({
  id, name, price, img, content, menuPath, description,
- link, count
+ link, count, total
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch()
 
-  const handleChange = () => setIsOpen(!isOpen);
+  const cartItems = {
+    id: id,
+    name: name,
+    price: price,
+    count: 1,
+    total: total,
+    img: img
+  }
+
+  const handleChange = () => {
+    setIsOpen(!isOpen);
+    dispatch(allActions.counterActions.increaseCount(0))
+  }
 
   return (
     <Grid key={id} className={styles['coffee-menu-body-container']}>
@@ -39,11 +55,14 @@ export const CoffeeMenuItems: React.FC<ICoffeeMenu> = ({
         content={content}
         menuPath={menuPath}
         price={price}
+        total={total}
         name={name}
         image={img}
         description={description}
         link={link}
         count={count}
+        dispatch={dispatch}
+        cartItems={cartItems}
       />
     </Grid>
   )

@@ -1,0 +1,120 @@
+.modal-container {
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  &-close-button {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 15px;
+      height: 15px;
+      margin-right: 10px;
+    }
+
+    p {
+      font-size: small !important;
+      font-weight: lighter;
+      color: silver;
+    }
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
+
+  &-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+  }
+
+  &-content {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 55%;
+    &-address {
+      min-height: 65%;
+      height: content-box;
+      width: content-box;
+
+      input {
+        width: 400px;
+        background-color: #e4e4e4;
+      }
+
+      &-valid-text {
+        color: black !important;
+      }
+
+      p {
+        color: red;
+        width: 400px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 300 !important;
+        font-size: smaller !important;
+        margin-left: 15px;
+      }
+    }
+
+    &-payment-method {
+      margin: 15px 0 0 15px;
+      font-weight: 200 !important;
+    }
+
+    &-checkbox {
+      display: flex;
+      align-items: center;
+      width: 15%;
+      margin: 10px 0 0 15px;
+
+      input {
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      label {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    height: 10%;
+
+    &-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: black;
+      width: 220px;
+      height: 40px;
+
+      &:hover {
+        cursor: pointer;
+        p {
+          opacity: 0.8;
+        }
+        &:active {
+          p {
+            zoom: 0.9;
+          }
+        }
+      }
+
+      p {
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      }
+    }
+  }
+}
