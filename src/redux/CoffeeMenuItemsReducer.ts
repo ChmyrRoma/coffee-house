@@ -1,3 +1,5 @@
+import { ADD_TO_CART, DECREMENT, DELETE_ITEM, INCREMENT, REMOVE_CART_ITEMS } from './actions/counterActions';
+
 const initialState = {
   count: 0,
   // @ts-ignore
@@ -52,21 +54,21 @@ const removeCartItems = (state: any) => {
 
 export const CoffeeMenuItemsReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case 'INCREMENT':
+    case INCREMENT:
       return {
         ...state,
         count: action.payload
       };
-    case 'DECREMENT':
+    case DECREMENT:
       return {
         ...state,
         count: action.payload
       };
-    case 'ADD_TO_CART':
+    case ADD_TO_CART:
       return addItemToCart(state, action.payload)
-    case 'DELETE_ITEM':
+    case DELETE_ITEM:
       return deleteItem(state, action.payload.itemId, action.payload.itemsStatus, action.payload.item)
-    case 'REMOVE_CART_ITEMS':
+    case REMOVE_CART_ITEMS:
       return removeCartItems(state)
     default:
       return state

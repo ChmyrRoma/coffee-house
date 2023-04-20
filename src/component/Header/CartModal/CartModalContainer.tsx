@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
 
 import CartModalOrder from './CartModalOrder/CartModalOrder';
 import { ShoppingCartList } from './ShoppingCart/ShoppingCartList';
 import { CartModalOrderList }from './CartModalOrder/CartModalOrderList/CartModalOrderList';
+import { CartModalOrderConfirmation } from './CartModalOrder/CartModalOrderConfirmation/CartModalOrderConfirmation';
 
 import { ShoppingCartSummary } from './ShoppingCart/ShoppingCartSummary';
 import styles from './CartModal.module.scss';
@@ -19,6 +20,9 @@ interface ICartModal {
   orderStatus: boolean
   handleCartModal: () => void
   handleChange: () => void
+  successOrder: () => void
+  confirmOrder: boolean
+  setConfirmOrder: any
 }
 
 interface ICartItem {
@@ -31,10 +35,14 @@ interface ICartItem {
 }
 
 
-const CartModalContainer: React.FC<ICartModal> = ({ cart, isCartModal, handleCartModal, handleChange, orderStatus }) => {
+const CartModalContainer: React.FC<ICartModal> = ({
+ cart, isCartModal, handleCartModal, handleChange, orderStatus, confirmOrder, setConfirmOrder, successOrder
+}) => {
   const [items, setItems] = useState<any[]>([]);
   const [subTotal, setSubTotal] = useState(0);
   const discount = 0;
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch()
 
@@ -101,24 +109,38 @@ const CartModalContainer: React.FC<ICartModal> = ({ cart, isCartModal, handleCar
     }
   }, [isCartModal])
 
+  useEffect(() => {
+    if (confirmOrder) {
+      navigate("/");
+    }
+  }, [confirmOrder]);
+
   const Modal = () => {
     return (
       <Grid className={classnames({ [styles['modal']]: true, [styles['modal-with-order']]: orderStatus })}>
-        <Grid className={classnames({ [styles['modal-left']]: true, [styles['modal-left-with-order']]: orderStatus })}>
-          { !orderStatus ? (
-            <ShoppingCartList cart={cart} dispatch={dispatch} handleCartModal={handleCartModal} reduceToString={reduceToString} items={items} />
-          ) : (
-            <CartModalOrder handleChange={handleCartModal} />
-          )
-          }
-        </Grid>
-        <Grid className={classnames({ [styles['modal-right']]: true, [styles['modal-right-with-order']]: orderStatus })}>
-          { !orderStatus ? (
-            <ShoppingCartSummary disabled={cart.length <= 0} subTotal={subTotal} discount={discount} handleChange={handleChange} reduceToString={reduceToString} />
-          ) : (
-            <CartModalOrderList items={items} handleChange={handleChange} subTotal={subTotal} reduceToString={reduceToString} />
-          )}
-        </Grid>
+        { !confirmOrder ? (
+          <>
+            <Grid className={classnames({ [styles['modal-left']]: true, [styles['modal-left-with-order']]: orderStatus })}>
+              { !orderStatus ? (
+                <ShoppingCartList cart={cart} dispatch={dispatch} handleCartModal={handleCartModal} reduceToString={reduceToString} items={items} />
+              ) : (
+                <CartModalOrder handleChange={handleCartModal} confirmOrder={confirmOrder} setConfirmOrder={setConfirmOrder} />
+              )
+              }
+            </Grid>
+            <Grid className={classnames({ [styles['modal-right']]: true, [styles['modal-right-with-order']]: orderStatus })}>
+              { !orderStatus ? (
+                <ShoppingCartSummary disabled={cart.length <= 0} subTotal={subTotal} discount={discount} handleChange={handleChange} reduceToString={reduceToString} />
+              ) : (
+                <CartModalOrderList items={items} handleChange={handleChange} subTotal={subTotal} reduceToString={reduceToString} />
+              )}
+            </Grid>
+          </>
+        ) : (
+          <Grid className={styles['modal-order-confirmation']}>
+            <CartModalOrderConfirmation successOrder={successOrder} />
+          </Grid>
+        )}
       </Grid>
     )
   }

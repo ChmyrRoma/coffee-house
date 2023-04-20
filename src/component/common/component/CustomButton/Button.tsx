@@ -5,11 +5,12 @@ import styles from './Button.module.scss';
 
 interface IButton {
   content: string
+  onClick?: any
 }
-export const Button: React.FC<IButton> = ({ content }) => {
+export const Button: React.FC<IButton> = ({ content, onClick }) => {
   return (
     <Grid>
-      <button className={styles.button}>{content}</button>
+      <button className={styles.button} onClick={onClick}>{content}</button>
     </Grid>
   )
 }

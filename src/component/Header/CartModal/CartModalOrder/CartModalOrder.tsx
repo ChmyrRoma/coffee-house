@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Grid } from '@mui/material';
 
 import { CustomInput } from '../../../common/component/CustomInput/CustomInput';
+import { checkEmailValidation, checkFormLength } from '../../../common/component/validation/Validation';
 import ArrowLeft from '../../../../assets/icons/back-button.png';
 
 import styles from './CartModalOrder.module.scss';
 
 interface ICartModalOrder {
   handleChange: () => void
+  confirmOrder: boolean
+  setConfirmOrder: (element: boolean) => void
 }
 
-const CartModalOrder: React.FC<ICartModalOrder> = ({ handleChange }) => {
+const CartModalOrder: React.FC<ICartModalOrder> = ({ handleChange, confirmOrder, setConfirmOrder }) => {
   const [acceptOrder, setAcceptOrder] = useState(false);
   const [correctField, setCorrectField] = useState('');
   const checked = true;
+
   const [emailValid, setEmailValid]: any = useState({
     content: '',
     status: false,
@@ -25,29 +29,18 @@ const CartModalOrder: React.FC<ICartModalOrder> = ({ handleChange }) => {
     address: '',
   })
 
-  const checkEmailValidation = (event: any) => {
-    const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    const value = event.target.value;
-    setValidContact({ name: validContact.name, surname: validContact.surname, email: value, address: validContact.address })
-
-    if (value.length <= 0) {
-      return setEmailValid({ content: '', status: false })
-    }
-    if (value.match(validRegex)) {
-      return setEmailValid({ content: '', status: true });
-    } else {
-      return setEmailValid({ content: 'Invalid email address!', status: false });
-    }
+  const checkValidForm = () => {
+    setAcceptOrder(checkFormLength(setAcceptOrder, setCorrectField, emailValid.status, validContact))
   }
 
-  const checkFormLength = ({ name, surname, email, address }: any) => {
-    if (name.length && surname.length && (email.length && emailValid.status) && address.length) {
-      setAcceptOrder(true)
-      setCorrectField('')
-    } else {
-      setCorrectField('This field is empty')
+  useEffect(() => {
+    if (acceptOrder) {
+      setConfirmOrder(!confirmOrder)
     }
-  }
+    setAcceptOrder(false)
+
+  }, [acceptOrder])
+
 
   return (
     <Grid className={styles['modal-container']}>
@@ -73,7 +66,10 @@ const CartModalOrder: React.FC<ICartModalOrder> = ({ handleChange }) => {
           <CustomInput
             placeholder="Email"
             type="email"
-            onChange={checkEmailValidation}
+            onChange={(e: any) => (
+                setValidContact({ name: validContact.name, surname: validContact.surname, email: e.target.value, address: validContact.address }),
+                checkEmailValidation(setValidContact, setEmailValid, validContact)
+            )}
           />
           {validContact.email.length <= 0 && <p>{correctField}</p>}
           <p className={styles['modal-container-content-address-valid-text']}>{emailValid.content}</p>
@@ -92,7 +88,7 @@ const CartModalOrder: React.FC<ICartModalOrder> = ({ handleChange }) => {
       <Grid className={styles['modal-container-footer']}>
         <Grid
           className={styles['modal-container-footer-button']}
-          onClick={() => checkFormLength(validContact)}
+          onClick={checkValidForm}
         >
           <p>Confirm Order</p>
         </Grid>

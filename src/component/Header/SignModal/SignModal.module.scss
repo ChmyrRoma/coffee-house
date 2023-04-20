@@ -19,6 +19,22 @@
   }
 }
 
+.log-modal-with-user-log {
+  height: 50px !important;
+  width: 150px !important;
+
+  &-text {
+    opacity: 0.8;
+    cursor: pointer;
+    font-weight: 300;
+    font-size: medium;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
 .log-modal {
   position: absolute;
   display: block;

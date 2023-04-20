@@ -29,12 +29,12 @@ const HomePage: React.FC<IHomePageProps> = ({ homeCoffeeMenu }) => {
   )
 
   return (
-    <Grid xs={12} className={styles['home-page']}>
+    <Grid className={styles['home-page']}>
       <HomePageHeader />
-      <Grid className={styles['home-page-body']} xs={6}>
+      <Grid className={styles['home-page-body']}>
         <HomePageHistory />
         <img src={Line} alt="line" className={styles.line} />
-        <Grid className={styles['home-page-body-menu']} xs={3}>
+        <Grid className={styles['home-page-body-menu']}>
           <Grid className={styles['home-page-body-menu-title']}>
             <p>Coffee House Top Menu Category</p>
           </Grid>

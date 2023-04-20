@@ -1,19 +1,11 @@
-import counterActions from './counterActions'
+import counterActions from './counterActions';
+import signActions from './signActions';
 
-export const homeAction = () => {
-  return {
-    type: 'HOME_PAGE_MENU`',
-  };
-}
 
-export const signAction = () => {
-  return {
-    type: 'SIGN_STATUS',
-  }
-}
 
 const allActions = {
-  counterActions
+  counterActions,
+  signActions,
 }
 
 export default allActions

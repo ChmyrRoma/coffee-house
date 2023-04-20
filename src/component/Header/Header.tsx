@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import SearchIcon from '@mui/icons-material/Search';
 import CoffeeHouse from '../../assets/icons/coffee-house.webp';
 
+import allActions from '../../redux/actions/actions';
 import { CustomInput } from '../common/component/CustomInput/CustomInput'
 import { HeaderModal } from './HeaderModal/HeaderModal';
 import { SignModal } from './SignModal/SignModal';
@@ -17,19 +18,28 @@ import '../common/styles/main.scss';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isLogModal, setIsLogModal] = useState(false)
+  const [isUserLog, setIsUserLog] = useState(false);
   const [orderStatus, setOrderStatus] = useState(false);
-  const [isCartModal, setIsCartModal] = useState(false)
+  const [isCartModal, setIsCartModal] = useState(false);
+  const [confirmOrder, setConfirmOrder] = useState(false);
+
 
   const state = useSelector((state: any) => state);
 
   const { categories }: any = state.coffeeMenu;
-  const { signStatus }: any = state.signStatus;
+  const { userLog }: any = state.signStatus;
   const { cart }: any = state.coffeeMenuItems;
 
-  console.log('CART::::::::', cart)
+  const dispatch = useDispatch()
 
   const handleChange = () => setOrderStatus(!orderStatus);
 
+  const successOrder = () => {
+    dispatch(allActions.counterActions.removeCartItems())
+    setConfirmOrder(false);
+    setOrderStatus(false);
+    setIsCartModal(false);
+  }
 
   const handleModal = () => {
     setIsOpen(!isOpen);
@@ -41,6 +51,18 @@ const Header = () => {
     setIsLogModal(false);
     setOrderStatus(false)
   }
+
+  const logOut = () => {
+    dispatch(allActions.signActions.logOutAction(userLog))
+  }
+
+  useEffect(() => {
+    if (userLog.length > 0) {
+      setIsUserLog(true)
+    } else {
+      setIsUserLog(false)
+    }
+  }, [userLog.length > 0])
 
   return (
     <Grid className={styles.header}>
@@ -60,7 +82,7 @@ const Header = () => {
       </Grid>
       <Grid className="vertical-line" />
       <Grid className={styles.row}>
-       <SignModal isLogModal={isLogModal} handleLogModal={handleLogModal} signStatus={signStatus} />
+        <SignModal isLogModal={isLogModal} handleLogModal={handleLogModal} isUserLog={isUserLog} userLog={userLog} logOut={logOut} />
       </Grid>
       <Grid className="vertical-line" />
       <Grid className={styles['shop-row']}>
@@ -70,6 +92,9 @@ const Header = () => {
           handleCartModal={handleCartModal}
           handleChange={handleChange}
           orderStatus={orderStatus}
+          confirmOrder={confirmOrder}
+          setConfirmOrder={setConfirmOrder}
+          successOrder={successOrder}
         />
       </Grid>
     </Grid>

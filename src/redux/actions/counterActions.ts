@@ -7,28 +7,28 @@ export const REMOVE_CART_ITEMS = 'REMOVE_CART_ITEMS';
 
 const increaseCount = (defaultCount: number) => {
   return ({
-    type: 'INCREMENT',
+    type: INCREMENT,
     payload: defaultCount
   });
 }
 
 const decreaseCount = (defaultCount: number) => {
   return ({
-    type: 'DECREMENT',
+    type: DECREMENT,
     payload: defaultCount
   });
 }
 
 const addToCart = (items: any) => {
   return ({
-    type: 'ADD_TO_CART',
+    type: ADD_TO_CART,
     payload: items
   });
 }
 
 const deleteItem = (itemId: number, itemsStatus: boolean, item: any) => {
   return ({
-    type: 'DELETE_ITEM',
+    type: DELETE_ITEM,
     payload: {
       itemId: itemId,
       itemsStatus: itemsStatus,
@@ -39,7 +39,7 @@ const deleteItem = (itemId: number, itemsStatus: boolean, item: any) => {
 
 const removeCartItems = () => {
   return ({
-    type: 'REMOVE_CART_ITEMS',
+    type: REMOVE_CART_ITEMS,
   })
 }
 
