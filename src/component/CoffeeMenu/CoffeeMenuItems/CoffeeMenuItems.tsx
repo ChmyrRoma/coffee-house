@@ -3,9 +3,9 @@ import { Grid } from '@mui/material';
 import { useDispatch } from 'react-redux';
 
 import { CoffeeMenuItemModal } from './CoffeeMenuItemModal/CoffeeMenuItemModal';
+import allActions from '../../../redux/actions/actions';
 
 import styles from './CoffeeMenuItems.module.scss';
-import allActions from "../../../redux/actions/actions";
 
 interface ICoffeeMenu {
   id: number

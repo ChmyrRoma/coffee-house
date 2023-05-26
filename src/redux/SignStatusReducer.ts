@@ -28,9 +28,6 @@ const createUser = (state: any, userData: any) => {
     state.content = '';
   }
 
-  // console.log('REGISTER', register)
-  // console.log('USERDATA', userData)
-
   if (!register.find((el: any) => el.email === userData.email)) {
     register.push(userData)
     localStorage.setItem('userData', JSON.stringify([...register]))
@@ -62,6 +59,7 @@ const signIn = (state: any, userData: any) => {
 
   register.map((el: any) => {
     if ((el.email === userData.email) && (el.password === userData.password) && (userLog.length < 1)) {
+      state.content = ''
       state.userLogStatus = true;
       userLog.push({
         name: el.name,

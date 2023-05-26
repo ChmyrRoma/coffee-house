@@ -28,8 +28,6 @@ const SignInContainer = () => {
   const state = useSelector((state: any) => state);
   const { userLog, userLogError, userLogStatus }: any = state.signStatus;
 
-  console.log('sdadsadasda', userLog)
-
   const dispatch = useDispatch()
 
   const signIn = () => {

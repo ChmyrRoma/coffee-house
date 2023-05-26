@@ -60,8 +60,6 @@ const CoffeeMenu: React.FC<ICoffeeMenuProps> = ({ type }) => {
   const { menu, categories } = state.coffeeMenu;
   const { count } = state.coffeeMenuItems;
 
-  console.log('TEST', count)
-
   const items = [
     { itemType: '', title: '', data: categories },
     { itemType: 'latte', title: 'Latte', data: menu.coffeeLatteMenu },
