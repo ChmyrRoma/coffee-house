@@ -16,6 +16,8 @@ export const checkFormLength = (setAcceptOrder: any, setCorrectField: any, email
   const objectKeys = Object.keys(validContact);
   let status = false;
 
+  console.log('objectValues', objectValues)
+
   objectKeys?.map((el: any, id) => {
     objectValues?.map((item: any) => {
       if ((validContact[el].length > 0) && (item[id].length > 0)) {
